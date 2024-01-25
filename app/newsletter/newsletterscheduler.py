@@ -121,7 +121,7 @@ def retrieve_subscribed_users():
 def schedule_newsletter_job():
     subscribed_users = retrieve_subscribed_users()
     for user_email in subscribed_users:
-        schedule.every().day.at("15:30").do(send_newsletter, user_email)
+        schedule.every().sunday.at("19:08").do(send_newsletter, user_email)
 
 def run_scheduler():
     while True:
