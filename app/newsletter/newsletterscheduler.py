@@ -5,11 +5,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import mysql.connector
+import os
+
 
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'FakePassword',
+    'password': os.environ["DBPassword"],
     'database': 'newslettersystemdb',
 }
 
@@ -31,9 +33,9 @@ def send_newsletter(user_email):
 
     smtp_server = 'smtp.gmail.com'
     smtp_port = 25
-    smtp_username = 'FakeEmail'
-    smtp_password = 'FakePassword'
-    sender_email = 'FakeEmail'
+    smtp_username = os.environ["smtp_username"]
+    smtp_password = os.environ["smtp_password"]
+    sender_email = os.environ["sender_email"]
 
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
@@ -119,7 +121,7 @@ def retrieve_subscribed_users():
 def schedule_newsletter_job():
     subscribed_users = retrieve_subscribed_users()
     for user_email in subscribed_users:
-        schedule.every().day.at("01:58").do(send_newsletter, user_email)
+        schedule.every().day.at("15:30").do(send_newsletter, user_email)
 
 def run_scheduler():
     while True:
