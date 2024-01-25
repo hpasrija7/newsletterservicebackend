@@ -23,7 +23,7 @@ def send_newsletter(user_email):
             <p>This is your weekly newsletter</p>
             <p>We wish to inform you that we have launched Parentune PLUS with many advanced features like 1:1 caoching, diet plan, nutrition traker etc.</p>
             <p>Click the link below to buy PLUS or to see what the parents are saying about PLUS. </p>
-            <a href="https://google.com">Buy Parentune PLUS</a>
+            <button><a href="https://newsletter-3uy1.onrender.com/">Buy Parentune PLUS</a></button>
             <p>Happy Parenting !!</p>
         </body>
     </html>
@@ -83,7 +83,7 @@ def log_failed_newsletter(user_email, error_message):
     cursor = connection.cursor()
 
     try:
-        cursor.execute("SELECT user_id FROM user WHERE email = %s", (user_email,))
+        cursor.execute("SELECT id FROM user WHERE email = %s", (user_email,))
         user_id = cursor.fetchone()
 
         if user_id:
